@@ -1,0 +1,27 @@
+{
+  "name": "nextbase",
+  "version": "1.0.0",
+  "description": "Boilerplate for Nextjs project",
+  "main": "server.js",
+  "author": "Jason",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .next node_modules ./static/workbox ./static/manifest out",
+    "dev": "NODE_ENV=development node server.js",
+    "build": "next build",
+    "export": "next export",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "next": "^6.1.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "next-manifest": "^1.5.0",
+    "next-workbox": "^1.4.1",
+    "node-sass": "^4.9.2",
+    "styled-jsx-plugin-sass": "^0.2.4"
+  }
+}
