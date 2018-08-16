@@ -1,5 +1,16 @@
+# misc
 .DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+scss/**/*.css
 
-node_modules
-.next
+# dependencies
+/node_modules
+
+# production
+/build
+/dist
+/.next
 
