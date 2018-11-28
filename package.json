@@ -13,15 +13,20 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@zeit/next-preact": "^0.1.0",
     "express": "^4.16.3",
-    "next": "^6.1.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "next": "^7.0.0",
+    "preact": "^8.3.1",
+    "preact-compat": "^3.18.4",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   },
   "devDependencies": {
-    "next-manifest": "^1.5.0",
+    "@zeit/next-sass": "^1.0.1",
+    "next-compose-plugins": "^2.1.1",
+    "next-manifest": "^1.6.0",
     "next-workbox": "^1.4.1",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.9.3",
     "styled-jsx-plugin-sass": "^0.2.4"
   }
 }

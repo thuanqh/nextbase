@@ -1,3 +1,4 @@
+//require('@zeit/next-preact/alias')()
 const {join} = require('path')
 const express = require('express')
 const next = require('next')
