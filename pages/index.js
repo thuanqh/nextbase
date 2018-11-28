@@ -1,11 +1,16 @@
 import Layout from '../components/layout'
 
+import '../assets/styles/style.scss'
+
 const backgroundColor = '#eee'
 
 export default () => (
-  <Layout>
+  <Layout title='Home - Nextbase'>
   <div className='hello'>
     <p>Hello World</p>
+    <div className='example'>
+      Hello next-sass
+    </div>
     <style jsx>{`
       $color: red;
       .hello {
