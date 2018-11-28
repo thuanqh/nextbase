@@ -24,7 +24,6 @@ export default class extends Document {
           			<style amp-custom=''>{`body {font-family: Roboto, sans-serif; padding: 30px; color: #444;} h1 {margin-bottom: 5px;} .byline { color: #aaa; margin-bottom: 25px; } p {font-size: 18px; line-height: 30px; margin-top: 30px;} .caption {color: #ccc; margin-top: 0; font-size: 14px; text-align: center;}`}</style>
           			<script async src='https://cdn.ampproject.org/v0.js' />
 					<link rel="icon" href="/static/favicon.ico" />
-					<title>NextBase Boilerplate</title>
 					<meta name="description" content="NextBase Boilerplate" />
 					<Manifest themeColor='#000000' />
 					
