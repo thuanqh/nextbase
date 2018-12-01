@@ -15,10 +15,9 @@ export default class extends Document {
 
 	render() {
 		return (
-			<html lang="en">
+			<html>
 				<Head>
 					<Manifest themeColor='#000000' />
-					<link rel='stylesheet' href='/_next/static/style.css' />
 				</Head>
 				<body>
 					<Main />

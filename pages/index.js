@@ -1,6 +1,6 @@
 import Layout from '../components/layout'
 
-import '../assets/styles/style.scss'
+import '../assets/styles/main.scss'
 
 const backgroundColor = '#eee'
 
