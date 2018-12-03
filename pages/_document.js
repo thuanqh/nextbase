@@ -15,8 +15,10 @@ export default class extends Document {
 
 	render() {
 		return (
-			<html>
+			<html lang="en">
 				<Head>
+					<link rel="icon" href="/static/favicon.ico" />
+					<title>NextBase Boilerplate</title>
 					<Manifest themeColor='#000000' />
 				</Head>
 				<body>
