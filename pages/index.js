@@ -1,31 +1,9 @@
-import Layout from '../components/layout'
+import React from "react";
+import styled from "styled-components";
 
-import '../assets/styles/main.scss'
+const Title = styled.h1`
+  color: red;
+  font-size: 50px;
+`;
 
-const backgroundColor = '#eee'
-
-export default () => (
-  <Layout title='Home - Nextbase'>
-  <div className='hello'>
-    <p>Hello World</p>
-    <div className='example'>
-      Hello next-sass
-    </div>
-    <style jsx>{`
-      $color: red;
-      .hello {
-        background-color: ${backgroundColor};
-        padding: 100px;
-        text-align: center;
-        transition: 100ms ease-in background;
-        &:hover {
-          color: $color;
-        }
-        @media only screen and (max-width: 480px) {
-          font-size: 20px;
-        }
-      }
-    `}</style>
-  </div>
-  </Layout>
-)
+export default () => <Title>My page</Title>;

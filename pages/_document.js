@@ -1,32 +1,29 @@
-import Document, {Head, Main, NextScript} from 'next/document'
-import flush from 'styled-jsx/server'
-import ServiceWorker from 'next-workbox/service-worker'
-import Manifest from 'next-manifest/manifest'
+import Document from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
-const isDev = process.env.NODE_ENV !== 'production'
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
-export default class extends Document {
-	static getInitialProps({renderPage}) {
-		return {
-			...renderPage(),
-			styles: flush()
-		}
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        )
+      };
+    } finally {
+      sheet.seal();
+    }
   }
-
-	render() {
-		return (
-			<html lang="en">
-				<Head>
-					<link rel="icon" href="/static/favicon.ico" />
-					<title>NextBase Boilerplate</title>
-					<Manifest themeColor='#000000' />
-				</Head>
-				<body>
-					<Main />
-					<NextScript />
-					<ServiceWorker src={'/static/workbox/sw.js'} scope={'../../'} unregister={isDev} />
-				</body>
-			</html>
-		)
-	}
 }

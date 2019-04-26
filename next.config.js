@@ -1,17 +1,4 @@
-const withPlugins = require('next-compose-plugins')
-const workbox = require('next-workbox')
-const manifest = require('next-manifest')
-const sass = require('@zeit/next-sass')
+const withPlugins = require("next-compose-plugins");
+const offline = require("next-offline");
 
-module.exports = withPlugins([
-	[workbox],
-	[manifest, {
-		manifest: {
-			icons: {
-				src: './assets/icon-512x512.png',
-				cache: true
-			}
-		}
-	}],
-	[sass],
-])
+module.exports = withPlugins([[offline]]);

@@ -19,14 +19,12 @@
     "preact": "^8.4.2",
     "preact-compat": "^3.18.5",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "@zeit/next-sass": "^1.0.1",
+    "babel-plugin-styled-components": "^1.10.0",
     "next-compose-plugins": "^2.1.1",
-    "next-manifest": "^1.6.0",
-    "next-workbox": "^1.4.1",
-    "node-sass": "^4.11.0",
-    "styled-jsx-plugin-sass": "^1.0.0"
+    "next-offline": "^3.3.8"
   }
 }
