@@ -1,4 +1,3 @@
-//require('@zeit/next-preact/alias')()
 const { join } = require("path");
 const { parse } = require("url");
 const express = require("express");
@@ -28,12 +27,22 @@ app.prepare().then(() => {
   server.get("*", (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
+    const rootStaticFiles = [
+      "/manifest.json",
+      "/sitemap.xml",
+      "/favicon.ico",
+      "/robots.txt",
+      "/browserconfig.xml",
+      "/site.webmanifest"
+    ];
 
     // handle GET request to /service-worker.js
     if (pathname === "/service-worker.js") {
       const filePath = join(__dirname, ".next", pathname);
-
       app.serveStatic(req, res, filePath);
+    } else if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
+      const path = join(__dirname, "static", parsedUrl.pathname);
+      app.serveStatic(req, res, path);
     } else {
       handle(req, res, parsedUrl);
     }
