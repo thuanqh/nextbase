@@ -6,20 +6,20 @@
   "author": "Jason",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf .next node_modules out",
+    "clean": "rm -rf .next node_modules out package-lock.json yarn.lock",
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
     "export": "next export",
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
-    "express": "^4.17.0",
+    "express": "^4.17.1",
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.2.0",
+    "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
-    "styled-system": "^4.2.2"
+    "styled-system": "^4.2.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
