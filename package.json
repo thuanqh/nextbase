@@ -13,26 +13,28 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@styled-system/prop-types": "^5.1.2",
+    "agonkit": "^1.0.5",
     "express": "^4.17.1",
-    "next": "^9.0.3",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "styled-components": "^4.3.2",
-    "styled-icons": "^8.3.0",
-    "styled-system": "^5.0.21"
+    "next": "^9.1.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "styled-components": "^4.4.0",
+    "styled-icons": "^8.6.0",
+    "styled-system": "^5.1.2"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-styled-components": "^1.10.6",
-    "eslint": "^6.1.0",
-    "eslint-config-react-app": "^5.0.0",
-    "eslint-plugin-flowtype": "^4.2.0",
+    "eslint": "^6.6.0",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-flowtype": "^4.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0",
     "next-compose-plugins": "^2.2.0",
-    "next-images": "^1.1.2",
-    "next-offline": "^4.0.3"
+    "next-images": "^1.2.0",
+    "next-offline": "^4.0.6"
   }
 }
