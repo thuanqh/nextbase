@@ -41,7 +41,7 @@ app.prepare().then(() => {
       const filePath = join(__dirname, ".next", pathname);
       app.serveStatic(req, res, filePath);
     } else if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
-      const path = join(__dirname, "static", parsedUrl.pathname);
+      const path = join(__dirname, "public", parsedUrl.pathname);
       app.serveStatic(req, res, path);
     } else {
       handle(req, res, parsedUrl);
