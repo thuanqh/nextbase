@@ -15,9 +15,6 @@ export default ({ children, title = "This is the default title" }) => (
         <Link href="/about">
           <a href="/about">About</a>
         </Link>
-        <Link href="/contact">
-          <a href="/contact">Contact</a>
-        </Link>
       </nav>
     </header>
 
