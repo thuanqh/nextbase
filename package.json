@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf .next node_modules out package-lock.json yarn.lock",
-    "dev": "NODE_ENV=development node server.js",
+    "develop": "NODE_ENV=development node server.js",
     "build": "next build",
     "export": "next export",
     "start": "NODE_ENV=production node server.js"
@@ -19,7 +19,7 @@
     "next": "^9.1.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-hook-form": "^3.29.4",
+    "react-hook-form": "^4.2.1",
     "react-spring": "^8.0.27",
     "styled-components": "^4.4.1",
     "styled-icons": "^9.1.0",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "babel-plugin-styled-components": "^1.10.6",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-flowtype": "^4.5.2",
     "eslint-plugin-import": "^2.19.1",
