@@ -1,6 +1,7 @@
 {
   "short_name": "NextBase",
   "name": "Nextjs Base",
+  "description": "Nextjs Base using service worker via next-offline",
   "icons": [
     {
       "src": "/static/images/icon-192x192.png",

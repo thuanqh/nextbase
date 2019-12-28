@@ -1,5 +1,3 @@
-const { join } = require("path");
-const { parse } = require("url");
 const express = require("express");
 const next = require("next");
 
@@ -12,39 +10,19 @@ app.prepare().then(() => {
   const server = express();
 
   server.get("/a", (req, res) => {
-    return app.render(req, res, "/b", req.query);
+    return app.render(req, res, "/a", req.query);
   });
 
   server.get("/b", (req, res) => {
-    return app.render(req, res, "/a", req.query);
+    return app.render(req, res, "/b", req.query);
   });
 
   server.get("/posts/:id", (req, res) => {
     return app.render(req, res, "/posts", { id: req.params.id });
   });
 
-  server.get("*", (req, res) => {
-    const parsedUrl = parse(req.url, true);
-    const { pathname } = parsedUrl;
-    const rootStaticFiles = [
-      "/manifest.json",
-      "/sitemap.xml",
-      "/favicon.ico",
-      "/robots.txt",
-      "/browserconfig.xml",
-      "/site.webmanifest"
-    ];
-
-    // handle GET request to /service-worker.js
-    if (pathname === "/service-worker.js") {
-      const filePath = join(__dirname, ".next", pathname);
-      app.serveStatic(req, res, filePath);
-    } else if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
-      const path = join(__dirname, "public", parsedUrl.pathname);
-      app.serveStatic(req, res, path);
-    } else {
-      handle(req, res, parsedUrl);
-    }
+  server.all("*", (req, res) => {
+    return handle(req, res);
   });
 
   server.listen(port, err => {

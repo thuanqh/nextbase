@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf .next node_modules out package-lock.json yarn.lock",
-    "develop": "NODE_ENV=development node server.js",
+    "dev": "NODE_ENV=development node server.js",
     "build": "next build",
     "export": "next export",
     "start": "NODE_ENV=production node server.js"
