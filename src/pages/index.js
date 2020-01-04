@@ -1,11 +1,20 @@
 import React from "react";
-import { Heading } from "agonkit";
-import Layout from "../components/layout";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 export default () => {
   return (
-    <Layout>
-      <Heading color="primary.500">Landing Page </Heading>
-    </Layout>
+    <Container maxWidth="sm">
+      <Box my={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Next Base
+        </Typography>
+        <Button variant="contained" color="primary">
+          Hello Nextbase
+        </Button>
+      </Box>
+    </Container>
   );
 };
