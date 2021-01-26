@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const next = require("next");
 const session = require("express-session");
@@ -15,10 +14,10 @@ app.prepare().then(() => {
   const sessionConfig = {
     secret: uid.sync(18),
     cookie: {
-      maxAge: 86400 * 1000
+      maxAge: 86400 * 1000,
     },
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
   };
   server.use(session(sessionConfig));
 
@@ -26,7 +25,7 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.listen(port, err => {
+  server.listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${port}`);
   });

@@ -1,18 +1,13 @@
 import React from "react";
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../utils/theme";
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
@@ -24,12 +19,12 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:
@@ -58,7 +53,7 @@ MyDocument.getInitialProps = async ctx => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
@@ -68,7 +63,7 @@ MyDocument.getInitialProps = async ctx => {
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),
-      sheets.getStyleElement()
-    ]
+      sheets.getStyleElement(),
+    ],
   };
 };
