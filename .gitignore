@@ -19,3 +19,7 @@ yarn.lock
 /.next
 /static/workbox
 /static/manifest
+**/public/workbox-*.js
+**/public/workbox-*.js.map
+**/public/sw.js
+**/public/sw.js.map

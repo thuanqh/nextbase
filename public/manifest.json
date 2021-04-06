@@ -1,15 +1,15 @@
 {
   "short_name": "NextBase",
   "name": "Nextjs Base",
-  "description": "Nextjs Base using service worker via next-offline",
+  "description": "Nextjs Base Starter",
   "icons": [
     {
-      "src": "/static/images/icon-192x192.png",
+      "src": "/icons/icon-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/static/images/icon-512x512.png",
+      "src": "/icons/icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
