@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
-const Index = () => {
+const IndexPage = () => {
   return (
     <Container maxWidth="sm">
       <Box my={4}>
@@ -18,4 +18,4 @@ const Index = () => {
     </Container>
   );
 };
-export default Index;
+export default IndexPage;
