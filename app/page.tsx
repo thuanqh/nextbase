@@ -3,6 +3,7 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
 import ListUsers from "@/components/list-users.component"
+import ListUser from "./ListUser"
 
 export default async function IndexPage() {
   return (
@@ -37,6 +38,9 @@ export default async function IndexPage() {
       </div>
       <div className="flex gap-4">
         <ListUsers />
+      </div>
+      <div className="flex gap-4">
+        <ListUser />
       </div>
     </section>
   )
