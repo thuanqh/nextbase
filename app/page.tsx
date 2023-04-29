@@ -2,13 +2,9 @@ import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
-import { prisma } from "@/lib/prisma"
-import Image from "next/image"
-import ListUsers from "@/components/listusers.component"
+import ListUsers from "@/components/list-users.component"
 
 export default async function IndexPage() {
-  let users = await prisma.user.findMany()
-
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
