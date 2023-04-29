@@ -12,10 +12,11 @@ export default function ListUsers() {
   let users = use<User[]>(getUsers())
 
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-5">
       {users.map((user) => (
         <div
           key={user.id}
+          className="border border-sky-500 text-center"
         >
           <Image
             src={`https://robohash.org/${user.id}?set=set2&size=180x180`}

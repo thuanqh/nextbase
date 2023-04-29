@@ -39,7 +39,9 @@ export default async function IndexPage() {
           GitHub
         </Link>
       </div>
-      <ListUsers />
+      <div className="flex gap-4">
+        <ListUsers />
+      </div>
     </section>
   )
 }
