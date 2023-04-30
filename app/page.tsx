@@ -4,8 +4,14 @@ import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
 import ListUsers from "@/components/list-users.component"
 import ListUser from "./ListUser"
+import { LoginButton, LogoutButton, ProfileButton, RegisterButton } from "@/components/buttons.component"
+import { getServerSession } from "next-auth"
+import { authOptions } from "./api/auth/[...nextauth]/route"
+import { User } from "@/components/user.component"
 
 export default async function IndexPage() {
+  const session = await getServerSession(authOptions)
+
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
@@ -19,6 +25,7 @@ export default async function IndexPage() {
         </p>
       </div>
       <div className="flex gap-4">
+
         <Link
           href={siteConfig.links.docs}
           target="_blank"
@@ -41,6 +48,19 @@ export default async function IndexPage() {
       </div>
       <div className="flex gap-4">
         <ListUser />
+      </div>
+      <div className="flex h-[70vh] items-center justify-center">
+        <div>
+          <LoginButton />
+          <RegisterButton />
+          <LogoutButton />
+          <ProfileButton />
+
+          <h1>Server Session</h1>
+          <pre>{JSON.stringify(session)}</pre>
+
+          <User />
+        </div>
       </div>
     </section>
   )
