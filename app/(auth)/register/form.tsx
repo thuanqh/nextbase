@@ -1,28 +1,34 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import { useState } from "react"
 import { signIn } from "next-auth/react"
-import { ChangeEvent, useState } from "react"
+import { cn } from "@/lib/utils"
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/components/icons";
+import { registerUserSchema } from "@/lib/validations/auth";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export const RegisterForm = () => {
-  const [loading, setLoading] = useState(false)
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "",
+interface RegisterUserFormProps extends React.HtmlHTMLAttributes<HTMLDivElement> { }
+
+type FormData = z.infer<typeof registerUserSchema>
+
+export const RegisterForm = ({ className, ...props }: RegisterUserFormProps) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(registerUserSchema)
   })
-  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const onSubmit = async (data: FormData) => {
     setLoading(true)
-    setFormValues({ name: "", email: "", password: "", role: "user" })
 
     try {
       const res = await fetch("/api/register", {
         method: "POST",
-        body: JSON.stringify(formValues),
+        body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
@@ -37,67 +43,68 @@ export const RegisterForm = () => {
       signIn(undefined, { callbackUrl: "/" })
     } catch (error: any) {
       setLoading(false)
-      setError(error)
     }
   }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormValues({ ...formValues, [name]: value })
-  }
-
-  const input_style = "form-control block w-full px-4 py-5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex w-[500px] flex-col gap-y-4"
-    >
-      {error && (
-        <p className="mb-6 rounded bg-red-300 py-4 text-center">{error}</p>
-      )}
-      <label htmlFor="name">Name</label>
-      <input
-        required
-        type="text"
-        name="name"
-        value={formValues.name}
-        onChange={handleChange}
-        className="p-4"
-      />
-      <label htmlFor="email">Email</label>
-      <input
-        required
-        type="email"
-        name="email"
-        value={formValues.email}
-        onChange={handleChange}
-        className="p-4"
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        required
-        type="password"
-        name="password"
-        value={formValues.password}
-        onChange={handleChange}
-        className="p-4"
-      />
-      <label htmlFor="role">Role</label>
-      <input
-        required
-        type="text"
-        name="role"
-        value={formValues.role}
-        onChange={handleChange}
-        className="p-4"
-      />
-      <button
-        className={cn(`${loading ? "bg-gray-300" : "bg-sky-500"}`, "cursor-pointer p-4 text-white")}
-        disabled={loading}
+    <div className={cn("grid gap-6", className)} {...props}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
       >
-        {loading ? "loading..." : "Register"}
-      </button>
-    </form>
+        <div className="grid gap-4">
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              required
+              type="text"
+              id="name"
+              {...register("name")}
+            />
+            {errors?.name && <p className="px-1 text-xs text-red-600">{errors.name.message}</p>}
+          </div>
+
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              required
+              type="email"
+              id="email"
+              {...register("email")}
+            />
+            {errors?.email && <p className="px-1 text-xs text-red-600">{errors.email.message}</p>}
+          </div>
+
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              required
+              type="password"
+              id="password"
+              {...register("password")}
+            />
+            {errors?.password && <p className="px-1 text-xs text-red-600">{errors.password.message}</p>}
+          </div>
+
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="role">Role</Label>
+            <Input
+              type="text"
+              id="role"
+              {...register("role")}
+            />
+            {errors?.role && <p className="px-1 text-xs text-red-600">{errors.role.message}</p>}
+          </div>
+          <button
+            className={cn(buttonVariants())}
+            disabled={loading}
+          >
+            {loading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
+            Register an Account
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }

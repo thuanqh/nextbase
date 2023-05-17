@@ -5,7 +5,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import ListUsers from "@/components/list-users"
 import { LoginButton, LogoutButton, ProfileButton, RegisterButton } from "@/components/auth-buttons"
 import { getServerSession } from "next-auth"
-import { authOptions } from "./api/auth/[...nextauth]/route"
+import { authOptions } from "../api/auth/[...nextauth]/route"
 import { User } from "@/components/user"
 import { ToastDestructive } from "@/components/toast-destructive"
 
