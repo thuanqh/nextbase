@@ -1,19 +1,14 @@
 "use client";
 
-import { User } from "@prisma/client";
-import { cache, use } from "react";
 import Image from "next/image";
-
-const getUsers = cache(() =>
-  fetch("http://localhost:3000/api/users").then((res) => res.json())
-)
+import { trpc } from "@/utils/trpc";
 
 export default function ListUsers() {
-  let users = use<User[]>(getUsers())
+  const { data: users, isLoading, isFetching } = trpc.getUsers.useQuery()
 
   return (
     <div className="grid grid-cols-4 gap-5">
-      {users.map((user) => (
+      {users?.map((user) => (
         <div
           key={user.id}
           className="border border-sky-500 text-center"
