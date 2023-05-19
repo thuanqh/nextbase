@@ -1,3 +1,5 @@
+"use client"
+
 interface RatingProps {
   selected?: number;
   onchange?: (selected: number) => void;

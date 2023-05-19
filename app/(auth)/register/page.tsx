@@ -1,6 +1,6 @@
 import { Icons } from "@/components/icons";
 import Link from "next/link";
-import { RegisterForm } from "./form";
+import { RegisterForm } from "@/components/register-form";
 
 export default function RegisterPage() {
   return (

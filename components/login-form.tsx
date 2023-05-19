@@ -8,60 +8,55 @@ import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { z } from "zod"
+import { userAuthSchema } from "@/lib/validations/auth"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useToast } from "@/components/ui/use-toast";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLInputElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+
+type FormData = z.infer<typeof userAuthSchema>
 
 export const LoginForm = ({ className, ...props }: UserAuthFormProps) => {
+  const { toast } = useToast()
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(userAuthSchema),
+  })
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  })
-  const [error, setError] = useState("")
+  const [githubLoading, setGithubLoading] = useState(false)
+  const [googleLoading, setGoogleLoading] = useState(false)
 
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile"
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      setLoading(true)
-      setFormValues({ email: "", password: "" })
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
 
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: formValues.email,
-        password: formValues.password,
-        callbackUrl,
-      })
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+      callbackUrl,
+    })
 
-      setLoading(false)
+    setLoading(false)
 
-      console.log(res)
-      if (!res?.error) {
-        router.push(callbackUrl)
-      } else {
-        setError("Invalid email or password")
-      }
-    } catch (error: any) {
-      setLoading(false)
-      setError(error)
+    if (!res?.error) {
+      return router.push(callbackUrl)
     }
-  }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value })
+    return toast({
+      title: "Something went wrong.",
+      description: "Your sign in request failed. Please try again.",
+    })
   }
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
-          {error && (
-            <p className="mb-6 rounded bg-red-300 py-4 text-center">{error}</p>
-          )}
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
               Email
@@ -69,22 +64,22 @@ export const LoginForm = ({ className, ...props }: UserAuthFormProps) => {
             <Input
               required
               type="email"
-              name="email"
-              value={formValues.email}
-              onChange={handleChange}
+              id="email"
               placeholder="Email address"
+              {...register("email")}
             />
+            {errors?.email && <p className="px-1 text-xs text-red-600">{errors.email.message}</p>}
             <Label className="sr-only" htmlFor="password">
               Password
             </Label>
             <Input
               required
               type="password"
-              name="password"
-              value={formValues.password}
-              onChange={handleChange}
+              id="password"
               placeholder="Password"
+              {...register("password")}
             />
+            {errors?.password && <p className="px-1 text-xs text-red-600">{errors.password.message}</p>}
           </div>
           <Button
             type="submit"
@@ -109,7 +104,7 @@ export const LoginForm = ({ className, ...props }: UserAuthFormProps) => {
         </div>
       </div>
       <Button variant="outline" type="button" disabled={loading} onClick={() => signIn("github", { callbackUrl })}>
-        {loading ? (
+        {githubLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.gitHub className="mr-2 h-4 w-4" />
@@ -117,7 +112,7 @@ export const LoginForm = ({ className, ...props }: UserAuthFormProps) => {
         Github
       </Button>
       <Button variant="outline" type="button" disabled={loading} onClick={() => signIn("google", { callbackUrl })}>
-        {loading ? (
+        {googleLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Icons.google className="mr-2 h-4 w-4" />
