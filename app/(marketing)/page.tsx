@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "../api/auth/[...nextauth]/route"
 import { User } from "@/components/user"
 import { ToastDestructive } from "@/components/toast-destructive"
+import { Suspense } from "react"
 
 export default async function IndexPage() {
   const session = await getServerSession(authOptions)
